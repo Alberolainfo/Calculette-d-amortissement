@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <cmath>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -16,6 +17,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void calculAmortisssement(double sommeEmprunte, double duree, double intere);
 
 private:
     Ui::MainWindow *ui;

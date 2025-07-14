@@ -39,6 +39,6 @@ void MainWindow::calculAmortisssement(double sommeEmprunte, double duree, double
     n = duree * 12;
     M = (sommeEmprunte * t)/(1 - pow(1 + t, -n));
     C = (M * n) - sommeEmprunte;
-    Total = (M * n) + sommeEmprunte;
+    Total = M * n;
 
 }

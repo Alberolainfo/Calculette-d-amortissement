@@ -13,16 +13,32 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-void MainWindow::calculAmortisssement(double sommeEmprunte, double duree, double intere){
-    double t;
-    double n;
-    double M;
-    double C;
-    double Total;
+/**
+ * @brief Calcule les mensualités d’un crédit.
+ *
+ * Cette fonction prend en compte le capital emprunté, la durée et le taux d’intérêt
+ * Calcule et affiche la mensualité, le coût total du crédit et le montant des intérêts.
+ *
+ * @param sommeEmprunte Montant emprunté (capital).
+ * @param duree Durée de l’emprunt en années.
+ * @param intere Taux d’intérêt annuel (en pourcentage).
+ */
+void MainWindow::calculAmortisssement(double sommeEmprunte, double duree, double intere)
+{
+    if(sommeEmprunte <= 0 || duree <= 0 || intere <= 0 || intere >= 100)//verifie si les valeur ne sont pas corompu
+    {
+        QMessageBox::critical(this, "Erreur", "Valeur incorrecte. Merci de vérifier les valeurs saisies !");
+        return;
+    }
+    double t;//variable pour stocker la valeur du taux d'interé
+    double n;//variable pour stocké le nombre total de mensualité
+    double M;//variable qui stocke la valeur des mensualité
+    double C;//variable qui stocke la montant total des intérêts
+    double Total;//varible qui stocke le cout total du crédits
     t = (intere/100)/12;
     n = duree * 12;
     M = (sommeEmprunte * t)/(1 - pow(1 + t, -n));
     C = (M * n) - sommeEmprunte;
     Total = (M * n) + sommeEmprunte;
+
 }

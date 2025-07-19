@@ -28,11 +28,6 @@ MainWindow::~MainWindow()
  */
 void MainWindow::calculAmortisssement(double sommeEmprunte, double duree, double intere)
 {
-    if(sommeEmprunte <= 0 || duree <= 0 || intere <= 0 || intere >= 100)//verifie si les valeur ne sont pas corompu
-    {
-        QMessageBox::critical(this, "Erreur", "Valeur incorrecte. Merci de vérifier les valeurs saisies !");
-        return;
-    }
     double t;//variable pour stocker la valeur du taux d'interé
     double n;//variable pour stocké le nombre total de mensualité
     double M;//variable qui stocke la valeur des mensualité
@@ -44,14 +39,41 @@ void MainWindow::calculAmortisssement(double sommeEmprunte, double duree, double
     C = (M * n) - sommeEmprunte;
     Total = M * n;
 
+    QString text; // Variable du texte à afficher dans textBrowser
+    text = "Pour un emprunt de " + QString::number(sommeEmprunte) +
+           " € à un taux d'intérêt de " + QString::number(intere) + " % et une durée de " +
+           QString::number(duree) + " ans :\n\n";
+    text += "  - La valeur des mensualités est de " + QString::number(M) + " €\n";
+    text += "  - Le montant total des intérêts est de " + QString::number(C) + " €\n";
+    text += "  - Le coût total du crédit est de " + QString::number(Total) + " €\n";
 
+    ui->textBrowser->setText(text);
+    ui->textBrowser->selectAll();
+    ui->textBrowser->setAlignment(Qt::AlignCenter);
 }
 
-void MainWindow::displayInfo(){
+void MainWindow::displayInfo()
+{
     QMessageBox::information(this, "Informations", "Les valeurs données ne sont pas représentatives de celles des banques");
 }
 
 void MainWindow::on_pushButton_clicked()
+{
+
+
+    if(ui->putSomme->value() <= 0 || ui->putInteret->value() <= 0 || ui->putAnnee->value() <= 0)
+        QMessageBox::critical(this, "Alerte", "Les valeurs d'entrées doivent être strictement supérieur à 0");
+    else{
+        double somme = ui->putSomme->value();
+        double duree = ui->putAnnee->value();
+        double interet = ui->putInteret->value();
+
+        calculAmortisssement(somme, duree, interet);
+    }
+}
+
+
+/*void MainWindow::on_pushButton_clicked()
 {
     if(ui->putSomme->value() <= 0 || ui->putInteret->value() <= 0 || ui->putAnnee->value() <= 0)
         QMessageBox::information(this, "Alerte", "Les valeurs d'entrées doivent être strictement supérieur à 0");
@@ -78,4 +100,4 @@ void MainWindow::on_pushButton_clicked()
         ui->textBrowser->setAlignment(Qt::AlignCenter);
         qDebug() << "Tu as cliqué\n";
     }
-}
+}*/

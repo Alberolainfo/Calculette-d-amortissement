@@ -54,7 +54,16 @@ void MainWindow::calculAmortisssement(double sommeEmprunte, double duree, double
 
 void MainWindow::displayInfo()
 {
-    QMessageBox::information(this, "Informations", "Les valeurs données ne sont pas représentatives de celles des banques");
+    QString text = "⚠️ Les valeurs affichées ne sont pas représentatives de celles pratiquées par les banques.\n\n";
+    text += "Ce logiciel effectue une simulation de crédit bancaire à partir des informations suivantes :\n";
+    text += "  - Le montant de la somme empruntée\n";
+    text += "  - Le taux d'intérêt bancaire (en pourcentage)\n";
+    text += "  - La durée du prêt (en années)\n\n";
+    text += "Une fois ces données collectées, le logiciel calcule :\n";
+    text += "  - Le coût total du crédit\n";
+    text += "  - Le montant des mensualités\n";
+    text += "  - Le montant total des intérêts\n";
+    QMessageBox::information(this, "Informations", text);
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -63,7 +72,9 @@ void MainWindow::on_pushButton_clicked()
 
     if(ui->putSomme->value() <= 0 || ui->putInteret->value() <= 0 || ui->putAnnee->value() <= 0)
         QMessageBox::critical(this, "Alerte", "Les valeurs d'entrées doivent être strictement supérieur à 0");
-    else{
+    else
+
+    {
         double somme = ui->putSomme->value();
         double duree = ui->putAnnee->value();
         double interet = ui->putInteret->value();

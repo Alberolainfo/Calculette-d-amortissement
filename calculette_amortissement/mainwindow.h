@@ -22,7 +22,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void calculAmortisssement(double sommeEmprunte, double duree, double intere);
+    void calculAmortisssement(long double sommeEmprunte, long double duree, long double intere);
+    QString formatageNombre(long double nombre);
 
 private :
     void displayInfo();

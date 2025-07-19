@@ -53,7 +53,7 @@
         <item>
          <widget class="QDoubleSpinBox" name="putSomme">
           <property name="maximum">
-           <double>10000000000000000000000.000000000000000</double>
+           <double>5000000000.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -74,7 +74,7 @@
         <item>
          <widget class="QDoubleSpinBox" name="putInteret">
           <property name="maximum">
-           <double>10000000000000000000000.000000000000000</double>
+           <double>100.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -95,7 +95,7 @@
         <item>
          <widget class="QDoubleSpinBox" name="putAnnee">
           <property name="maximum">
-           <double>10000000000000000000000.000000000000000</double>
+           <double>100.000000000000000</double>
           </property>
          </widget>
         </item>
@@ -157,7 +157,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <x>0</x>
      <y>0</y>
      <width>796</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuInformation">

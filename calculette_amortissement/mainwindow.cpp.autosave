@@ -53,6 +53,11 @@ void MainWindow::calculAmortisssement(long double sommeEmprunte, long double dur
     ui->textBrowser->setAlignment(Qt::AlignCenter);
 }
 
+/**
+ * @brief MainWindow::formatageNombre
+ * @param nombre : nombr
+ * @return 
+ */
 QString MainWindow::formatageNombre(long double nombre)
 {
     QString textNonFormate = QString::number(nombre, 'f', 2);
@@ -108,11 +113,6 @@ void MainWindow::displayInfo()
     text += "  - Le montant des mensualités\n";
     text += "  - Le montant total des intérêts\n";
     QMessageBox::information(this, "Informations", text);
-    formatageNombre(500000. * 3);
-    formatageNombre(100.956);
-    formatageNombre(5000000000.);
-    formatageNombre(1000.6);
-    formatageNombre(103500.);
 }
 
 void MainWindow::on_pushButton_clicked()

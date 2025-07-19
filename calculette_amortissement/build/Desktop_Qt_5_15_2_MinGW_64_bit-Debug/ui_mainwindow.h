@@ -86,7 +86,7 @@ public:
 
         putSomme = new QDoubleSpinBox(centralwidget);
         putSomme->setObjectName(QString::fromUtf8("putSomme"));
-        putSomme->setMaximum(10000000000000000000000.000000000000000);
+        putSomme->setMaximum(5000000000.000000000000000);
 
         horizontalLayout->addWidget(putSomme);
 
@@ -103,7 +103,7 @@ public:
 
         putInteret = new QDoubleSpinBox(centralwidget);
         putInteret->setObjectName(QString::fromUtf8("putInteret"));
-        putInteret->setMaximum(10000000000000000000000.000000000000000);
+        putInteret->setMaximum(100.000000000000000);
 
         horizontalLayout_2->addWidget(putInteret);
 
@@ -120,7 +120,7 @@ public:
 
         putAnnee = new QDoubleSpinBox(centralwidget);
         putAnnee->setObjectName(QString::fromUtf8("putAnnee"));
-        putAnnee->setMaximum(10000000000000000000000.000000000000000);
+        putAnnee->setMaximum(100.000000000000000);
 
         horizontalLayout_3->addWidget(putAnnee);
 
@@ -152,7 +152,7 @@ public:
         MainWindow->setStatusBar(statusbar);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 796, 25));
+        menuBar->setGeometry(QRect(0, 0, 796, 22));
         menuInformation = new QMenu(menuBar);
         menuInformation->setObjectName(QString::fromUtf8("menuInformation"));
         MainWindow->setMenuBar(menuBar);

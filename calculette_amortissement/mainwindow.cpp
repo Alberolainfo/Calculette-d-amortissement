@@ -40,12 +40,12 @@ void MainWindow::calculAmortisssement(long double sommeEmprunte, long double dur
     Total = M * n;
 
     QString text; // Variable du texte à afficher dans textBrowser
-    text = "<p><strong>Pour un emprunt de " + QString::number(sommeEmprunte, 'f', 2) +
-           " € à un taux d'intérêt de " + QString::number(intere, 'f', 2) + " % et une durée de " +
-           QString::number(duree, 'f', 2) + " ans :</strong></p>";
-    text += "<ul><li> La valeur des mensualités est de " + QString::number(M, 'f', 2) + " €</li>";
-    text += "<li> Le montant total des intérêts est de " + QString::number(C, 'f', 2) + " €</li>";
-    text += "<li> Le coût total du crédit est de " + QString::number(Total, 'f', 2) + " €</li></ul>";
+    text = "<p><strong>Pour un emprunt de " + formatageNombre(sommeEmprunte) +
+           " € à un taux d'intérêt de " + formatageNombre(intere) + " % et une durée de " +
+           formatageNombre(duree) + " ans :</strong></p>";
+    text += "<ul><li> La valeur des mensualités est de " + formatageNombre(M) + " €</li>";
+    text += "<li> Le montant total des intérêts est de " + formatageNombre(C) + " €</li>";
+    text += "<li> Le coût total du crédit est de " + formatageNombre(Total) + " €</li></ul>";
 
     ui->textBrowser->clear();
     ui->textBrowser->insertHtml(text);
@@ -53,18 +53,25 @@ void MainWindow::calculAmortisssement(long double sommeEmprunte, long double dur
     ui->textBrowser->setAlignment(Qt::AlignCenter);
 }
 
+/**
+ * @brief MainWindow::formatageNombre
+ * Cette fonction recupére un nombre brut (exemple : 100000.50),
+ * renvoie un qstring plus lissible (exemple : 100 000,50)
+ * @param nombre : nombre a traité
+ * @return un string formaté pour l'affichage
+ */
 QString MainWindow::formatageNombre(long double nombre)
 {
-    QString textNonFormate = QString::number(nombre, 'f', 2);
-    QString textFormate = "";
+    QString textNonFormate = QString::number(nombre, 'f', 2);//nombre brut retrenscris en qstring
+    QString textFormate = "";//variable pour stocké le nombre formaté
     int i = 0;
 
-    for(i; textNonFormate[i] != "."; i++)
+    for(i; textNonFormate[i] != "."; i++)//recupere les nombre avant la virgule
     {
         textFormate += textNonFormate[i];
     }
 
-    for(i; i >= 0; i--)
+    for(i; i >= 0; i--)//suprime le nombre avant la virgule ainsi que la virgule elle meme
     {
         textNonFormate.remove(i, 1);
     }
@@ -72,7 +79,7 @@ QString MainWindow::formatageNombre(long double nombre)
     int size = textFormate.size();
     std::reverse(textFormate.begin(), textFormate.end());
     int inser = 3;
-    for(i = 0; i <= size; i++)
+    for(i = 0; i <= size; i++)//insere les espace
     {
         if(i % 3 == 0 && i != 0)
         {
@@ -108,17 +115,10 @@ void MainWindow::displayInfo()
     text += "  - Le montant des mensualités\n";
     text += "  - Le montant total des intérêts\n";
     QMessageBox::information(this, "Informations", text);
-    formatageNombre(500000. * 3);
-    formatageNombre(100.956);
-    formatageNombre(5000000000.);
-    formatageNombre(1000.6);
-    formatageNombre(103500.);
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-
-
     if(ui->putSomme->value() <= 0 || ui->putInteret->value() <= 0 || ui->putAnnee->value() <= 0)
         QMessageBox::critical(this, "Alerte", "Les valeurs d'entrées doivent être strictement supérieur à 0");
     else

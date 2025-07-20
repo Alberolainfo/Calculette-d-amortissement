@@ -29,7 +29,7 @@ MainWindow::~MainWindow()
 void MainWindow::calculAmortisssement(long double sommeEmprunte, long double duree, long double intere)
 {
     long double t;//variable pour stocker la valeur du taux d'interé
-    long double n;//variable pour stocké le nombre total de mensualité
+    long double n;//variable pour stocker le nombre total de mensualité
     long double M;//variable qui stocke la valeur des mensualité
     long double C;//variable qui stocke la montant total des intérêts
     long double Total;//varible qui stocke le cout total du crédits
@@ -40,17 +40,15 @@ void MainWindow::calculAmortisssement(long double sommeEmprunte, long double dur
     Total = M * n;
 
     QString text; // Variable du texte à afficher dans textBrowser
-    text = "<p><strong>Pour un emprunt de " + formatageNombre(sommeEmprunte) +
-           " € à un taux d'intérêt de " + formatageNombre(intere) + " % et une durée de " +
-           formatageNombre(duree) + " ans :</strong></p>";
+    text = "<p style='text-align:center;'><strong>Pour un emprunt de " + formatageNombre(sommeEmprunte) +
+           " € à un taux d'intérêt de " + formatageNombre(intere) + " %<br/> et une durée de " +
+           formatageNombre(duree) + " ans :</strong>";
     text += "<ul><li> La valeur des mensualités est de " + formatageNombre(M) + " €</li>";
     text += "<li> Le montant total des intérêts est de " + formatageNombre(C) + " €</li>";
-    text += "<li> Le coût total du crédit est de " + formatageNombre(Total) + " €</li></ul>";
+    text += "<li> Le coût total du crédit est de " + formatageNombre(Total) + " €</li></ul></p>";
 
     ui->textBrowser->clear();
     ui->textBrowser->insertHtml(text);
-    ui->textBrowser->selectAll();
-    ui->textBrowser->setAlignment(Qt::AlignCenter);
 }
 
 /**

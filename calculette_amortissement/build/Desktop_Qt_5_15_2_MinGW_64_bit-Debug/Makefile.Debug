@@ -19,7 +19,7 @@ CXXFLAGS      = -fno-keep-inline-dllexport -g -std=gnu++1z -Wall -Wextra -Wextra
 INCPATH       = -I..\..\..\calculette_amortissement -I. -IC:\Qt\5.15.2\mingw81_64\include -IC:\Qt\5.15.2\mingw81_64\include\QtWidgets -IC:\Qt\5.15.2\mingw81_64\include\QtGui -IC:\Qt\5.15.2\mingw81_64\include\QtANGLE -IC:\Qt\5.15.2\mingw81_64\include\QtCore -Idebug -I. -I/include -IC:\Qt\5.15.2\mingw81_64\mkspecs\win32-g++ 
 LINKER      =        g++
 LFLAGS        =        -Wl,-subsystem,windows -mthreads
-LIBS        =        C:\Qt\5.15.2\mingw81_64\lib\libQt5Widgets.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Gui.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Core.a  -lmingw32 C:\Qt\5.15.2\mingw81_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
+LIBS        =        C:\Qt\5.15.2\mingw81_64\lib\libQt5Widgets.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Gui.a C:\Qt\5.15.2\mingw81_64\lib\libQt5Core.a debug\my_app_res.o  -lmingw32 C:\Qt\5.15.2\mingw81_64\lib\libqtmain.a -LC:\openssl\lib -LC:\Utils\my_sql\mysql-5.7.25-winx64\lib -LC:\Utils\postgresql\pgsql\lib -lshell32 
 QMAKE         = C:\Qt\5.15.2\mingw81_64\bin\qmake.exe
 DEL_FILE      = del
 CHK_DIR_EXISTS= if not exist
@@ -40,7 +40,7 @@ IDC           = idc
 IDL           = midl
 ZIP           = zip -r -9
 DEF_FILE      = 
-RES_FILE      = 
+RES_FILE      = debug\my_app_res.o
 SED           = $(QMAKE) -install sed
 MOVE          = move
 
@@ -56,7 +56,7 @@ OBJECTS       = debug/main.o \
 		debug/mainwindow.o \
 		debug/moc_mainwindow.o
 
-DIST          =  ..\..\mainwindow.h ..\..\main.cpp \
+DIST          = logo.ico ..\..\mainwindow.h ..\..\main.cpp \
 		..\..\mainwindow.cpp
 QMAKE_TARGET  = calculette_amortissement
 DESTDIR        = debug\ #avoid trailing-slash linebreak
@@ -68,8 +68,11 @@ DESTDIR_TARGET = debug\calculette_amortissement.exe
 first: all
 all: Makefile.Debug  debug/calculette_amortissement.exe
 
-debug/calculette_amortissement.exe: C:/Qt/5.15.2/mingw81_64/lib/libQt5Widgets.a C:/Qt/5.15.2/mingw81_64/lib/libQt5Gui.a C:/Qt/5.15.2/mingw81_64/lib/libQt5Core.a C:/Qt/5.15.2/mingw81_64/lib/libqtmain.a ui_mainwindow.h $(OBJECTS) 
+debug/calculette_amortissement.exe: C:/Qt/5.15.2/mingw81_64/lib/libQt5Widgets.a C:/Qt/5.15.2/mingw81_64/lib/libQt5Gui.a C:/Qt/5.15.2/mingw81_64/lib/libQt5Core.a C:/Qt/5.15.2/mingw81_64/lib/libqtmain.a ui_mainwindow.h $(OBJECTS) debug/my_app_res.o
 	$(LINKER) $(LFLAGS) -o $(DESTDIR_TARGET) $(OBJECTS)  $(LIBS)
+
+debug/my_app_res.o: ../../my_app.rc
+	windres -i ..\..\my_app.rc -o debug\my_app_res.o --include-dir=./../.. $(DEFINES)
 
 qmake: FORCE
 	@$(QMAKE) -o Makefile.Debug ..\..\calculette_amortissement.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
@@ -81,6 +84,7 @@ dist:
 
 clean: compiler_clean 
 	-$(DEL_FILE) debug\main.o debug\mainwindow.o debug\moc_mainwindow.o
+	-$(DEL_FILE) debug\my_app_res.o
 
 distclean: clean 
 	-$(DEL_FILE) .qmake.stash
@@ -545,6 +549,9 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QDebug \
 		ui_mainwindow.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/QVariant \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QAction \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qaction.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qactiongroup.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QApplication \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtCore/qcoreapplication.h \
@@ -552,13 +559,28 @@ debug/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qdesktopwidget.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qguiapplication.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtGui/qinputmethod.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QDoubleSpinBox \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qspinbox.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QHBoxLayout \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qboxlayout.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qlayout.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qlayoutitem.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qgridlayout.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QLabel \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qlabel.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMenu \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmenu.h \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QMenuBar \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmenubar.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qmenu.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qaction.h \
-		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qactiongroup.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QPushButton \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qpushbutton.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qabstractbutton.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QSpinBox \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QStatusBar \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qstatusbar.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QTextBrowser \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/qtextbrowser.h \
+		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QVBoxLayout \
 		C:/Qt/5.15.2/mingw81_64/include/QtWidgets/QWidget
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\mainwindow.o ..\..\mainwindow.cpp
 

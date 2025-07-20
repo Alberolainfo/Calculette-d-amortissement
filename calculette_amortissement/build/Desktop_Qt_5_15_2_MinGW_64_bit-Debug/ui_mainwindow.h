@@ -19,6 +19,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QVBoxLayout>
@@ -43,7 +44,7 @@ public:
     QDoubleSpinBox *putInteret;
     QHBoxLayout *horizontalLayout_3;
     QLabel *label_3;
-    QDoubleSpinBox *putAnnee;
+    QSpinBox *putAnnee;
     QTextBrowser *textBrowser;
     QPushButton *pushButton;
     QStatusBar *statusbar;
@@ -54,8 +55,33 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(796, 537);
-        MainWindow->setStyleSheet(QString::fromUtf8(""));
+        MainWindow->resize(578, 568);
+        MainWindow->setStyleSheet(QString::fromUtf8("*{\n"
+"	color: rgb(255, 255, 255);\n"
+"	background-color: rgb(0, 0, 0);\n"
+"	font: 700 12pt \"Segoe UI\";\n"
+"}\n"
+"#label_4{\n"
+"	font: 800 26pt \"Segoe UI\";\n"
+"	margin: 0.5em;\n"
+"	margin-top: 0.2em;\n"
+"	border: 2px solid rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton{\n"
+"	margin : 1em;\n"
+"	margin-bottom: 0.2em;\n"
+"	padding: 0.4em;\n"
+"	background-color: rgb(57, 0, 170);\n"
+"	border: 2px solid rgb(255, 255, 255);\n"
+"}\n"
+"QPushButton:pressed{\n"
+"	background-color: rgb(50, 0, 150);\n"
+"	border: 1px solid rgb(150, 150, 150);\n"
+"}\n"
+"QtextBrowser{\n"
+"	background-color:black;\n"
+"	font: 700 15pt \"Segoe UI\";\n"
+"}"));
         actionInfo = new QAction(MainWindow);
         actionInfo->setObjectName(QString::fromUtf8("actionInfo"));
         actionQuitter = new QAction(MainWindow);
@@ -67,9 +93,7 @@ public:
         label_4 = new QLabel(centralwidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setFocusPolicy(Qt::FocusPolicy::TabFocus);
-        label_4->setStyleSheet(QString::fromUtf8("#label_4{\n"
-"        margin-top: 2em;\n"
-"}"));
+        label_4->setStyleSheet(QString::fromUtf8(""));
         label_4->setAlignment(Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop);
 
         verticalLayout->addWidget(label_4);
@@ -118,9 +142,8 @@ public:
 
         horizontalLayout_3->addWidget(label_3);
 
-        putAnnee = new QDoubleSpinBox(centralwidget);
+        putAnnee = new QSpinBox(centralwidget);
         putAnnee->setObjectName(QString::fromUtf8("putAnnee"));
-        putAnnee->setMaximum(100.000000000000000);
 
         horizontalLayout_3->addWidget(putAnnee);
 
@@ -152,7 +175,7 @@ public:
         MainWindow->setStatusBar(statusbar);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 796, 22));
+        menuBar->setGeometry(QRect(0, 0, 578, 27));
         menuInformation = new QMenu(menuBar);
         menuInformation->setObjectName(QString::fromUtf8("menuInformation"));
         MainWindow->setMenuBar(menuBar);
@@ -186,8 +209,8 @@ public:
 "hr { height: 1px; border-width: 0; }\n"
 "li.unchecked::marker { content: \"\\2610\"; }\n"
 "li.checked::marker { content: \"\\2612\"; }\n"
-"</style></head><body style=\" font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><br /></p></body></html>", nullptr));
+"</style></head><body style=\" font-family:'Segoe UI'; font-size:12pt; font-weight:700; font-style:normal;\">\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt; font-weight:400;\"><br /></p></body></html>", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Valider", nullptr));
         menuInformation->setTitle(QCoreApplication::translate("MainWindow", "Menu", nullptr));
     } // retranslateUi

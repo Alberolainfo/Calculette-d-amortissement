@@ -96,7 +96,6 @@ QString MainWindow::formatageNombre(long double nombre)
         textFormate.remove(0, 1);
     }
 
-    qDebug() << textFormate;
     return textFormate;
 }
 

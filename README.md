@@ -5,19 +5,19 @@
 
 <p>Le projet a été réalisé par Ouhnia Yassin et Alberola Athony, dans le but d'apprendre à travailler en coopération et de démontrer notre savoir-faire de manière simple.</p>
 
-<lu>Fonctionnalités:
+<lu><strong>Fonctionnalités :</strong>
     <li>Calcul des intérêts d'un prêt à taux fixe.</li>
     <li>Calcul des mensualités.</li>
     <li>Calcul du coût total du crédit.</li></lu>
 
-<lu>Utilisation:
+<lu><strong>Utilisation :</strong>
     <li>Lancez le programme.</li>
     <li>Entrez le montant du prêt, le taux d'intérêt (en pourcentage) et la durée du prêt.<li></lu>
-    <lu>Le logiciel vous affichera :
+    <lu><strong>Le logiciel vous affichera :</strong>
         <li>Le montant des intérêts.</li>
         <li>Le montant des mensualités.</li>
         <li>Le coût total du crédit.</li></lu>
 
-<lu>Auteurs:
+<lu><strong>Auteurs :</strong>
     <li>Ouhnia Yassin</li>
     <li>Alberola Anthony</li></lu>

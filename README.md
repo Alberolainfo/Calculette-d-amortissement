@@ -12,7 +12,7 @@
 
 <lu><strong>Utilisation :</strong>
     <li>Lancez le programme.</li>
-    <li>Entrez le montant du prêt, le taux d'intérêt (en pourcentage) et la durée du prêt.<li></lu>
+    <li>Entrez le montant du prêt, le taux d'intérêt (en pourcentage) et la durée du prêt.</li></lu>
     <lu><strong>Le logiciel vous affichera :</strong>
         <li>Le montant des intérêts.</li>
         <li>Le montant des mensualités.</li>

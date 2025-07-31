@@ -1,4 +1,4 @@
-#Calculateur de Taux d'Intérêt de Prêt Bancaire
+<h1>#Calculatrice d'amortissement de prêt bancaire</h1>
 
 <h2>Description:</h2>
 <p>Ce petit logiciel permet de calculer les taux d'intérêt d'un prêt bancaire à taux fixe. En entrant le montant du prêt, le taux d'intérêt et la durée de remboursement, il retourne le montant des intérêts, les mensualités, et le coût total du crédit.</p>

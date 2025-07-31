@@ -3,9 +3,14 @@
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    , ui(new Ui::MainWindow), enFrancais(true)
 {
     ui->setupUi(this);
+
+
+    ui->layoutLangue->setAlignment(Qt::AlignRight);
+    initTexte();
+
     connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::on_pushButton_clicked);
     connect(ui->actionInfo, &QAction::triggered, this, &MainWindow::displayInfo);
     connect(ui->actionQuitter, &QAction::triggered, this, &MainWindow::close);
@@ -14,6 +19,48 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+/**
+ * @brief MainWindow::initTexte
+ * Inittialise les texte pour leurs utilisation
+ */
+void MainWindow::initTexte(){
+    titre[0] = "Calculette d'amortissement";
+    titre[1] = "Amortization Calculator";
+
+    texteWarning[0] = "Les valeurs d'entrée doivent être strictement supérieures à 0";
+    texteWarning[1] = "Input values must be strictly greater than 0";
+
+    texteInfo[0] = "⚠️ Les valeurs affichées ne sont pas représentatives de celles pratiquées par les banques.\n"
+                   "La valeur maximal des entrées ne doit pas être superieur à 5 000 000 000\n\n"
+                   "Ce logiciel effectue une simulation de crédit bancaire à partir des informations suivantes :\n"
+                   "  - Le montant de la somme empruntée\n"
+                   "  - Le taux d'intérêt bancaire (en pourcentage)\n"
+                   "  - La durée du prêt (en années)\n\n"
+                   "Une fois ces données collectées, le logiciel calcule :\n"
+                   "  - Le coût total du crédit\n"
+                   "  - Le montant des mensualités\n"
+                   "  - Le montant total des intérêts\n";
+    texteInfo[1] = "⚠️ The displayed values are not representative of those used by banks.\n"
+                   "The maximum value for inputs must not exceed 5,000,000,000.\n\n"
+                   "This software simulates a bank loan based on the following information:\n"
+                   "  - The amount borrowed\n"
+                   "  - The interest rate (in percentage)\n"
+                   "  - The loan duration (in years)\n\n"
+                   "Once this data is entered, the software calculates:\n"
+                   "  - The total cost of the loan\n"
+                   "  - The monthly payments\n"
+                   "  - The total interest paid\n";
+
+    texteIntituleFr[0] = "Somme du prêt :";
+    texteIntituleFr[1] = "Taux d'intêrets :";
+    texteIntituleFr[2] = "Années :";
+
+    texteIntituleEn[0] = "Loan amount:";
+    texteIntituleEn[1] = "Interest rate:";
+    texteIntituleEn[2] = "Years:";
 }
 
 /**
@@ -101,25 +148,22 @@ QString MainWindow::formatageNombre(long double nombre)
 
 void MainWindow::displayInfo()
 {
-    QString text = "⚠️ Les valeurs affichées ne sont pas représentatives de celles pratiquées par les banques.\n"
-                   "La valeur maximal des entrées ne doit pas être superieur à 5 000 000 000\n\n";
-    text += "Ce logiciel effectue une simulation de crédit bancaire à partir des informations suivantes :\n";
-    text += "  - Le montant de la somme empruntée\n";
-    text += "  - Le taux d'intérêt bancaire (en pourcentage)\n";
-    text += "  - La durée du prêt (en années)\n\n";
-    text += "Une fois ces données collectées, le logiciel calcule :\n";
-    text += "  - Le coût total du crédit\n";
-    text += "  - Le montant des mensualités\n";
-    text += "  - Le montant total des intérêts\n";
+    QString text;
+    int indice = 0;
+    (enFrancais == true) ? indice = 0 : indice = 1;
+    text = texteInfo[indice];
     QMessageBox::information(this, "Informations", text);
 }
 
 void MainWindow::on_pushButton_clicked()
 {
     if(ui->putSomme->value() <= 0 || ui->putInteret->value() <= 0 || ui->putAnnee->value() <= 0)
-        QMessageBox::critical(this, "Alerte", "Les valeurs d'entrées doivent être strictement supérieur à 0");
+    {
+        int indice = 0;
+        (enFrancais == true) ? indice = 0 : indice = 1;
+        QMessageBox::critical(this, "Alerte", texteWarning[indice]);
+    }
     else
-
     {
         double somme = ui->putSomme->value();
         double duree = ui->putAnnee->value();
@@ -128,3 +172,27 @@ void MainWindow::on_pushButton_clicked()
         calculAmortisssement(somme, duree, interet);
     }
 }
+
+void MainWindow::on_radioButtonEn_toggled(bool checked)
+{
+    enFrancais = false;
+    ui->label_4->clear();
+    ui->label_4->setText(titre[1]);
+    ui->label->setText(texteIntituleEn[0]);
+    ui->label_2->setText(texteIntituleEn[1]);
+    ui->label_3->setText(texteIntituleEn[2]);
+    ui->pushButton->setText("Confirm");
+}
+
+
+void MainWindow::on_radioButtonFr_toggled(bool checked)
+{
+    enFrancais = true;
+    ui->label_4->clear();
+    ui->label_4->setText(titre[0]);
+    ui->label->setText(texteIntituleFr[0]);
+    ui->label_2->setText(texteIntituleFr[1]);
+    ui->label_3->setText(texteIntituleFr[2]);
+    ui->pushButton->setText("Valider");
+}
+

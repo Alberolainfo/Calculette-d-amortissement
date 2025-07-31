@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>578</width>
-    <height>568</height>
+    <width>523</width>
+    <height>564</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,10 +23,11 @@
 	font: 800 26pt &quot;Segoe UI&quot;;
 	margin: 0.5em;
 	margin-top: 0.2em;
+	padding:0.2em;
 	border: 2px solid rgb(255, 255, 255);
 }
 QPushButton{
-	margin : 1em;
+	margin : 1.5em;
 	margin-bottom: 0.2em;
 	padding: 0.4em;
 	background-color: rgb(57, 0, 170);
@@ -39,10 +40,39 @@ QPushButton:pressed{
 QtextBrowser{
 	background-color:black;
 	font: 700 15pt &quot;Segoe UI&quot;;
-}</string>
+}
+QRadioButton{
+	font: 600 8pt &quot;Segoe UI&quot;;
+}
+
+</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <layout class="QVBoxLayout" name="layoutLangue">
+      <item>
+       <widget class="QRadioButton" name="radioButtonFr">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Francais</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="radioButtonEn">
+        <property name="styleSheet">
+         <string notr="true">left: 530px;</string>
+        </property>
+        <property name="text">
+         <string>English</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
     <item>
      <widget class="QLabel" name="label_4">
       <property name="focusPolicy">
@@ -175,7 +205,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>578</width>
+     <width>523</width>
      <height>27</height>
     </rect>
    </property>

@@ -19,6 +19,7 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextBrowser>
@@ -33,7 +34,10 @@ public:
     QAction *actionInfo;
     QAction *actionQuitter;
     QWidget *centralwidget;
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *layoutLangue;
+    QRadioButton *radioButtonFr;
+    QRadioButton *radioButtonEn;
     QLabel *label_4;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout;
@@ -55,7 +59,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(578, 568);
+        MainWindow->resize(523, 564);
         MainWindow->setStyleSheet(QString::fromUtf8("*{\n"
 "	color: rgb(255, 255, 255);\n"
 "	background-color: rgb(0, 0, 0);\n"
@@ -65,10 +69,11 @@ public:
 "	font: 800 26pt \"Segoe UI\";\n"
 "	margin: 0.5em;\n"
 "	margin-top: 0.2em;\n"
+"	padding:0.2em;\n"
 "	border: 2px solid rgb(255, 255, 255);\n"
 "}\n"
 "QPushButton{\n"
-"	margin : 1em;\n"
+"	margin : 1.5em;\n"
 "	margin-bottom: 0.2em;\n"
 "	padding: 0.4em;\n"
 "	background-color: rgb(57, 0, 170);\n"
@@ -81,22 +86,44 @@ public:
 "QtextBrowser{\n"
 "	background-color:black;\n"
 "	font: 700 15pt \"Segoe UI\";\n"
-"}"));
+"}\n"
+"QRadioButton{\n"
+"	font: 600 8pt \"Segoe UI\";\n"
+"}\n"
+"\n"
+""));
         actionInfo = new QAction(MainWindow);
         actionInfo->setObjectName(QString::fromUtf8("actionInfo"));
         actionQuitter = new QAction(MainWindow);
         actionQuitter->setObjectName(QString::fromUtf8("actionQuitter"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        verticalLayout = new QVBoxLayout(centralwidget);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout_2 = new QVBoxLayout(centralwidget);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        layoutLangue = new QVBoxLayout();
+        layoutLangue->setObjectName(QString::fromUtf8("layoutLangue"));
+        radioButtonFr = new QRadioButton(centralwidget);
+        radioButtonFr->setObjectName(QString::fromUtf8("radioButtonFr"));
+        radioButtonFr->setStyleSheet(QString::fromUtf8(""));
+
+        layoutLangue->addWidget(radioButtonFr);
+
+        radioButtonEn = new QRadioButton(centralwidget);
+        radioButtonEn->setObjectName(QString::fromUtf8("radioButtonEn"));
+        radioButtonEn->setStyleSheet(QString::fromUtf8("left: 530px;"));
+
+        layoutLangue->addWidget(radioButtonEn);
+
+
+        verticalLayout_2->addLayout(layoutLangue);
+
         label_4 = new QLabel(centralwidget);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setFocusPolicy(Qt::FocusPolicy::TabFocus);
         label_4->setStyleSheet(QString::fromUtf8(""));
         label_4->setAlignment(Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop);
 
-        verticalLayout->addWidget(label_4);
+        verticalLayout_2->addWidget(label_4);
 
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
@@ -151,7 +178,7 @@ public:
         verticalLayout_3->addLayout(horizontalLayout_3);
 
 
-        verticalLayout->addLayout(verticalLayout_3);
+        verticalLayout_2->addLayout(verticalLayout_3);
 
         textBrowser = new QTextBrowser(centralwidget);
         textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
@@ -161,13 +188,13 @@ public:
         textBrowser->setSizeAdjustPolicy(QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored);
         textBrowser->setReadOnly(true);
 
-        verticalLayout->addWidget(textBrowser);
+        verticalLayout_2->addWidget(textBrowser);
 
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
         pushButton->setAutoRepeatDelay(306);
 
-        verticalLayout->addWidget(pushButton);
+        verticalLayout_2->addWidget(pushButton);
 
         MainWindow->setCentralWidget(centralwidget);
         statusbar = new QStatusBar(MainWindow);
@@ -175,7 +202,7 @@ public:
         MainWindow->setStatusBar(statusbar);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 578, 27));
+        menuBar->setGeometry(QRect(0, 0, 523, 27));
         menuInformation = new QMenu(menuBar);
         menuInformation->setObjectName(QString::fromUtf8("menuInformation"));
         MainWindow->setMenuBar(menuBar);
@@ -199,6 +226,8 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         actionInfo->setText(QCoreApplication::translate("MainWindow", "Informations", nullptr));
         actionQuitter->setText(QCoreApplication::translate("MainWindow", "Quitter", nullptr));
+        radioButtonFr->setText(QCoreApplication::translate("MainWindow", "Francais", nullptr));
+        radioButtonEn->setText(QCoreApplication::translate("MainWindow", "English", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Calculette d'amortissement", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Somme du pr\303\252t :", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Taux d'int\303\252rets :", nullptr));

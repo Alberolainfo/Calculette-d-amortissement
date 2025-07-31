@@ -41,9 +41,11 @@ private:
     bool enFrancais;
     QString titre[2];//titre[0] = français & titre[1] = englais
     QString texteWarning[2];
+    QString titreWarning[2];
     QString texteInfo[2];
+    QString titreInfo[2];
     QString texteIntituleFr[3];
     QString texteIntituleEn[3];
-
+    QString texteGenerer[2];
 };
 #endif // MAINWINDOW_H

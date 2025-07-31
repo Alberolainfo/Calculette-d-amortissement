@@ -61,6 +61,23 @@ void MainWindow::initTexte(){
     texteIntituleEn[0] = "Loan amount:";
     texteIntituleEn[1] = "Interest rate:";
     texteIntituleEn[2] = "Years:";
+
+    titreInfo[0] = "Informations";
+    titreInfo[1] = "Information";
+
+    titreWarning[0] = "Alerte";
+    titreWarning[1] = "Alert";
+
+    texteGenerer[0] = "<p style='text-align:center;'><strong>Pour un emprunt de %1"
+                    " € à un taux d'intérêt de %2 %<br/> et une durée de %3 ans :</strong>"
+                    "<ul><li> La valeur des mensualités est de %4 €</li>"
+                    "<li> Le montant total des intérêts est de %5 €</li>"
+                    "<li> Le coût total du crédit est de %6 €</li></ul></p>";
+    texteGenerer[1] = "<p style='text-align:center;'><strong>For a loan of %1 $ at an interest rate of %2%"
+                      "<br/> and a term of %3 years:</strong>"
+                    "<ul><li> The monthly payment amount is %4 $</li>"
+                    "<li> The total amount of interest is %5 $</li>"
+                    "<li> The total cost of the loan is %6 $</li></ul></p>";
 }
 
 /**
@@ -86,13 +103,12 @@ void MainWindow::calculAmortisssement(long double sommeEmprunte, long double dur
     C = (M * n) - sommeEmprunte;
     Total = M * n;
 
-    QString text; // Variable du texte à afficher dans textBrowser
-    text = "<p style='text-align:center;'><strong>Pour un emprunt de " + formatageNombre(sommeEmprunte) +
-           " € à un taux d'intérêt de " + formatageNombre(intere) + " %<br/> et une durée de " +
-           formatageNombre(duree) + " ans :</strong>";
-    text += "<ul><li> La valeur des mensualités est de " + formatageNombre(M) + " €</li>";
-    text += "<li> Le montant total des intérêts est de " + formatageNombre(C) + " €</li>";
-    text += "<li> Le coût total du crédit est de " + formatageNombre(Total) + " €</li></ul></p>";
+    int indice;
+    (enFrancais) ? indice = 0 : indice = 1;
+    QString text = QString(texteGenerer[indice])
+                       .arg(formatageNombre(sommeEmprunte)) .arg(formatageNombre(intere))
+                       .arg(formatageNombre(duree)) .arg(formatageNombre(M)) .arg(formatageNombre(C))
+                       .arg(formatageNombre(Total)); // Variable du texte à afficher dans textBrowser
 
     ui->textBrowser->clear();
     ui->textBrowser->insertHtml(text);
@@ -109,6 +125,10 @@ QString MainWindow::formatageNombre(long double nombre)
 {
     QString textNonFormate = QString::number(nombre, 'f', 2);//nombre brut retrenscris en qstring
     QString textFormate = "";//variable pour stocké le nombre formaté
+    char espace = ' ';
+    (enFrancais) ? espace = ' ' : espace = ',';
+    char virgule = ',';
+    (enFrancais) ? virgule = ',' : virgule = '.';
     int i = 0;
 
     for(i; textNonFormate[i] != "."; i++)//recupere les nombre avant la virgule
@@ -128,7 +148,7 @@ QString MainWindow::formatageNombre(long double nombre)
     {
         if(i % 3 == 0 && i != 0)
         {
-            textFormate.insert(inser, ' ');
+            textFormate.insert(inser, espace);
             inser += 4;
         }
     }
@@ -136,9 +156,9 @@ QString MainWindow::formatageNombre(long double nombre)
     std::reverse(textFormate.begin(), textFormate.end());
     if(textNonFormate.toInt() != 0)
     {
-        textFormate += "," + textNonFormate;
+        textFormate += virgule + textNonFormate;
     }
-    if(textFormate[0] == " ")
+    if(textFormate[0] == espace)
     {
         textFormate.remove(0, 1);
     }
@@ -152,7 +172,7 @@ void MainWindow::displayInfo()
     int indice = 0;
     (enFrancais == true) ? indice = 0 : indice = 1;
     text = texteInfo[indice];
-    QMessageBox::information(this, "Informations", text);
+    QMessageBox::information(this, titreInfo[indice], text);
 }
 
 void MainWindow::on_pushButton_clicked()
@@ -161,7 +181,7 @@ void MainWindow::on_pushButton_clicked()
     {
         int indice = 0;
         (enFrancais == true) ? indice = 0 : indice = 1;
-        QMessageBox::critical(this, "Alerte", texteWarning[indice]);
+        QMessageBox::critical(this, titreWarning[indice], texteWarning[indice]);
     }
     else
     {
@@ -182,6 +202,9 @@ void MainWindow::on_radioButtonEn_toggled(bool checked)
     ui->label_2->setText(texteIntituleEn[1]);
     ui->label_3->setText(texteIntituleEn[2]);
     ui->pushButton->setText("Confirm");
+    ui->actionInfo->setText("Information");
+    ui->actionQuitter->setText("Quit");
+    ui->textBrowser->clear();
 }
 
 
@@ -194,5 +217,8 @@ void MainWindow::on_radioButtonFr_toggled(bool checked)
     ui->label_2->setText(texteIntituleFr[1]);
     ui->label_3->setText(texteIntituleFr[2]);
     ui->pushButton->setText("Valider");
+    ui->actionInfo->setText("Informations");
+    ui->actionQuitter->setText("Quitter");
+    ui->textBrowser->clear();
 }
 

@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QLineEdit>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,6 +15,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton, &QPushButton::clicked, this, &MainWindow::on_pushButton_clicked);
     connect(ui->actionInfo, &QAction::triggered, this, &MainWindow::displayInfo);
     connect(ui->actionQuitter, &QAction::triggered, this, &MainWindow::close);
+
+    breakQtCode(ui->putInteret);
+    breakQtCode(ui->putSomme);
+
 }
 
 MainWindow::~MainWindow()
@@ -92,23 +97,23 @@ void MainWindow::initTexte(){
  */
 void MainWindow::calculAmortisssement(long double sommeEmprunte, long double duree, long double intere)
 {
-    long double t;//variable pour stocker la valeur du taux d'interé
-    long double n;//variable pour stocker le nombre total de mensualité
-    long double M;//variable qui stocke la valeur des mensualité
-    long double C;//variable qui stocke la montant total des intérêts
-    long double Total;//varible qui stocke le cout total du crédits
-    t = (intere/100)/12;
-    n = duree * 12;
-    M = (sommeEmprunte * t)/(1 - pow(1 + t, -n));
-    C = (M * n) - sommeEmprunte;
-    Total = M * n;
+    long double valueInteret;
+    long double nbMensualite;
+    long double valueMensualite;
+    long double totalInteret;
+    long double totalCreditCost;
+    valueInteret = (intere/100)/12;
+    nbMensualite = duree * 12;
+    valueMensualite = (sommeEmprunte * valueInteret)/(1 - pow(1 + valueInteret, - nbMensualite));
+    totalInteret = (valueMensualite * nbMensualite) - sommeEmprunte;
+    totalCreditCost = valueMensualite * nbMensualite;
 
     int indice;
     (enFrancais) ? indice = 0 : indice = 1;
     QString text = QString(texteGenerer[indice])
                        .arg(formatageNombre(sommeEmprunte)) .arg(formatageNombre(intere))
-                       .arg(formatageNombre(duree)) .arg(formatageNombre(M)) .arg(formatageNombre(C))
-                       .arg(formatageNombre(Total)); // Variable du texte à afficher dans textBrowser
+                       .arg(formatageNombre(duree)) .arg(formatageNombre(valueMensualite)) .arg(formatageNombre(totalInteret))
+                       .arg(formatageNombre(totalCreditCost)); // Variable du texte à afficher dans textBrowser
 
     ui->textBrowser->clear();
     ui->textBrowser->insertHtml(text);
@@ -173,6 +178,33 @@ void MainWindow::displayInfo()
     (enFrancais == true) ? indice = 0 : indice = 1;
     text = texteInfo[indice];
     QMessageBox::information(this, titreInfo[indice], text);
+}
+
+//Entrée nombre flottant virgule ou point
+void MainWindow::breakQtCode(QDoubleSpinBox *doubleSpinBox)
+{
+    class DoubleValidator : public QValidator
+    {
+        const QValidator *old;
+    public:
+        DoubleValidator(const QValidator *old_)
+            : QValidator(const_cast<QValidator*>(old_)), old(old_)
+        {}
+
+        void fixup ( QString & input ) const
+        {
+            input.replace(".", QLocale().decimalPoint());
+            input.replace(",", QLocale().decimalPoint());
+            old->fixup(input);
+        }
+        QValidator::State validate ( QString & input, int & pos ) const
+        {
+            fixup(input);
+            return old->validate(input, pos);
+        }
+    };
+    QLineEdit *lineEdit = doubleSpinBox->findChild<QLineEdit*>();
+    lineEdit->setValidator(new DoubleValidator(lineEdit->validator()));
 }
 
 void MainWindow::on_pushButton_clicked()

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <cmath>
 #include "QMessageBox"
+#include "qspinbox.h"
 #include <QComboBox>
 #include <QTextEdit>
 #include <QDebug>
@@ -25,6 +26,7 @@ public:
     void calculAmortisssement(long double sommeEmprunte, long double duree, long double intere);
     QString formatageNombre(long double nombre);
     void initTexte();
+    void breakQtCode(QDoubleSpinBox *doubleSpinBox);
 
 private slots:
 

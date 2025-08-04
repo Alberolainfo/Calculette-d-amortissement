@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionInfo, &QAction::triggered, this, &MainWindow::displayInfo);
     connect(ui->actionQuitter, &QAction::triggered, this, &MainWindow::close);
 
+    ui->radioButtonFr->setChecked(true);
     breakQtCode(ui->putInteret);
     breakQtCode(ui->putSomme);
 

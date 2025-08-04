@@ -1,0 +1,3 @@
+set(__QT_DEPLOY_TARGET_CalculetteAmortissement_FILE C:/Users/Battler/Desktop/Programmation/C++/Backup/Calculette d'amortissement/calculette_amortissement/CalculetteAmortissement.exe)
+set(__QT_DEPLOY_TARGET_CalculetteAmortissement_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_CalculetteAmortissement_RUNTIME_DLLS )

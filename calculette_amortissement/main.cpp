@@ -2,6 +2,11 @@
 
 #include <QApplication>
 
+#include <QtPlugin>
+
+//Pour éviter que Qt charge dynamiquement certains plugins
+Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
